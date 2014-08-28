@@ -1,0 +1,59 @@
+//am 20140828 ListSpeedTestComments.txt
+Objective: Test java ArrayList and LinkedList for speed using relatively large recordset by removing records from beginning, one fourth, center, three fourth and the end of it. 
+
+How it was done: 
+1. Project "paymentAlliance-1" was created using Eclipse with single com.paymentalliance.ListSpeedTest.java class with "main" method.
+2. Results with metrics were logged using System.out (later copied to ListSpeedResult.txt).
+3. All work is done inside "com.paymentalliance.ListSpeedTest" class with "main" method.
+
+What "com.paymentalliance.ListSpeedTest" class does:
+1. Function "fillList" initializes both arrayList and linkedList lists with MAX_CAPACITY=1000000 records of type: String, reporting time spent in ms.
+2. Looping through FRONT, ONE_FOURTH, CENTER, THREE_FOURTH and BACK set of locations, function "removeRecordsUsingIterator" removes n-records from each pre-filled arrayList and linkedList, reporting time spent.   
+  
+Notes:
+1. Function "removeRecords" was created (not in use now and it output is not included in ListSpeedTestResult.txt) to test speed using List or CollectionUtils "removeAll" method.
+2. Function "insertRecordsUsingIterator" was created (not in use and output is not in ListSpeedTestResult.txt) to test insert speed for ArrayList and LinkedList.
+
+Interpretation of output result in file ListSpeedTestResult.txt:
+1. Adding records to the List: ArrayList is faster ((2156 - 2047)/2047 * 100 = 5% while adding 1000000 records) then LinkedList. See Lines 2 and 3 in ListSpeedTestResult.txt.
+This advantage is "numbers of added records" dependent, in other words increasing number of records in 20% causes speed difference of 50% (not included in result). 
+Both ArrayList and LinkedList should take O(1) time during add operations, but ArrayList seems to be faster in adding (it allows to specify max Capacity up-front too) records.
+
+2. Speed of removing records from ArrayList and Linked list seems to be quite different.
+(Please note that every time 10000 records were deleted from ArrayList and 20000 from LinkedList in each section/location of the list. 
+Since every run reduced remaining number of records in a list, next run had less number of records to deal with). 
+
+2.1 Removing from FRONT section (lines 8 and 9 in ListSpeedTestResult.txt):
+ArrayList: 59500 ms. No Travelling Time!
+LinkedList: 47 ms. (Travelling Time: 31 ms.)
+
+2.2 Removing from ONE_FOURTH section (lines 12 and 13 in ListSpeedTestResult.txt):
+ArrayList: 44375 ms. No Travelling Time!
+LinkedList: 31 ms. (Travelling Time: 31 ms.)
+
+2.3 Removing from CENTER section (lines 16 and 17 in ListSpeedTestResult.txt):
+ArrayList: 29578 ms. (Travelling Time: 16 ms.)
+LinkedList: 63 ms. (Travelling Time: 47 ms.)
+
+2.4 Removing from THREE_FOURTH section (lines 20 and 21 in ListSpeedTestResult.txt):
+ArrayList: 14312 ms. (Travelling Time: 31 ms.)
+LinkedList: 79 ms. (Travelling Time: 79 ms.)
+
+2.5 Removing from BACK section (lines 24 and 25 in ListSpeedTestResult.txt):
+ArrayList: 78 ms. (Travelling Time: 31 ms.) 
+LinkedList: 93 ms. (Travelling Time: 78 ms.)
+
+Conclusion:
+LinkedList does deleting much faster then ArrayList, it does slow down a bit toward the end of recordset 
+but this time seems to be spent on "travelling" to the section where delete operation is needed (CENTER, THREE_FOURTH, etc..).
+
+According to published docs ArrayList spends O(n) and LinkedList O(1) time during delete operations. 
+Probably because LinkedList just drops next and previous pointers for each deleted node while ArrayList also pushes values in underneath array.
+
+It seems that with large number of records in list and number of records that needs to be removed  
+especially if remove operations are often, LinkedList is a better choice then ArrayList from speed prospective.
+ 
+Despite the fact that LinkedList takes more memory and slower then ArrayList while adding records.
+
+Note: using removeAll list or CollectionUtils function is the worst speed-wise choice.
+Lesson: Multiple factors need to be considered before making a choice between ArrayList and LinkedList.     
