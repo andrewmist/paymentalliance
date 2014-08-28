@@ -1,0 +1,27 @@
+Speed Test: Removing n-records from {FRONT,ONE_FOURTH,CENTER,THREE_FOURTH,BACK} of Array and Linked Lists - Starting...
+Adding 1000000 records to ArrayList took: 2047 ms.
+Adding 1000000 records to LinkedList took: 2156 ms.
+
+Removing records using iterator...
+
+Removing from: FRONT...
+Removing 10000 records from: ArrayList FRONT using Iterator took: 59500 ms. No Travelling Time! Items left: 990000
+Removing 20000 records from: LinkedList FRONT using Iterator took: 47 ms. (Travelling Time: 31 ms.) Items left: 980000
+
+Removing from: ONE_FOURTH...
+Removing 10000 records from: ArrayList ONE_FOURTH using Iterator took: 44375 ms. No Travelling Time! Items left: 980000
+Removing 20000 records from: LinkedList ONE_FOURTH using Iterator took: 31 ms. (Travelling Time: 31 ms.) Items left: 960000
+
+Removing from: CENTER...
+Removing 10000 records from: ArrayList CENTER using Iterator took: 29578 ms. (Travelling Time: 16 ms.) Items left: 970000
+Removing 20000 records from: LinkedList CENTER using Iterator took: 63 ms. (Travelling Time: 47 ms.) Items left: 940000
+
+Removing from: THREE_FOURTH...
+Removing 10000 records from: ArrayList THREE_FOURTH using Iterator took: 14312 ms. (Travelling Time: 31 ms.) Items left: 960000
+Removing 20000 records from: LinkedList THREE_FOURTH using Iterator took: 79 ms. (Travelling Time: 79 ms.) Items left: 920000
+
+Removing from: BACK...
+Removing 10000 records from: ArrayList BACK using Iterator took: 78 ms. (Travelling Time: 31 ms.) Items left: 950000
+Removing 20000 records from: LinkedList BACK using Iterator took: 93 ms. (Travelling Time: 78 ms.) Items left: 900000
+
+Speed Test: Removing n-records from {FRONT,ONE_FOURTH,CENTER,THREE_FOURTH,BACK} of Array and Linked Lists - Done!
